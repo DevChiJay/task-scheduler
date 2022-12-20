@@ -1,0 +1,44 @@
+<%- include('../shared/includes/head', { pageTitle: 'Add new tasks' })  %>
+<link rel="stylesheet" href="/styles/forms.css">
+</head>
+<body>
+    <%- include('../shared/includes/header')  %>
+    <main>
+        <h1>Add New Task</h1>
+        <form action="" method="POST">
+            <!-- <input type="hidden" name="_csrf"> - Cant work with the enctype -->
+            <p>
+                <label for="task">Task</label>
+                <input type="text" id="task" name="taskname" required>
+            </p>
+            <p>
+                <label for="duration">Duration (mins)</label>
+                <input type="number" id="duration" name="duration">
+            </p>
+            <p>
+                <label for="nextappear">How Many Times A Day</label>
+                <select
+                name="nextappear"
+                id="nextappear"
+                required
+              >
+              <option value="24">1</option>
+              <option value="12">2</option>
+              <option value="8">3</option>
+              <option value="6">4</option>
+              <option value="4">6</option>
+              <option value="3">8</option>
+              <option value="2">12</option>
+              <option value="1">24</option>
+
+              </select>
+            </p>
+            
+            <p>
+                <button type="reset" class="btn btn-alt">Reset</button>
+                <button class="btn">Add Task</button>
+            </p>
+        </form>
+
+    </main>
+    <%- include('../shared/includes/footer')  %>

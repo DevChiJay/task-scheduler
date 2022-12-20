@@ -1,0 +1,31 @@
+<%- include('shared/includes/head', { pageTitle: 'My ToDo List' })  %>
+<script src="/scripts/task-management.js" defer></script>
+</head>
+<body>
+    <%- include('shared/includes/header')  %>
+    <main>
+        <h2>
+            Active ToDo
+        </h2>
+        <ul class="todo">
+            <% for (const task of activeTask) { %>
+            <li>
+                <span id="todoname"><%= task.taskname %> (<%= task.duration %> mins)</span> <button class="btn btn-alt" data-taskid="<%= task.id %>">Complete</button>
+            </li>
+            
+            <% } %>
+        </ul>
+
+        <h2>
+            Done Tasks
+        </h2>
+        <% for (const task of doneTask) { %>
+        <ul>
+            <li>
+                <%= task.taskname %>(<%= task.duration %>) <button class="btn btn-done"><%= task.status %></button>
+            </li>
+        </ul>
+        <% } %>
+
+    </main>
+    <%- include('shared/includes/footer')  %>
