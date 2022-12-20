@@ -8,7 +8,6 @@ class Task {
     this.duration = taskData.duration;
     this.nextappear = taskData.nextappear;
     this.status = taskData.status;
-    this.schedule = taskData.schedule;
     if (taskData._id) {
       this.id = taskData._id.toString();
     }
@@ -87,7 +86,6 @@ class Task {
       duration: +this.duration,
       nextappear: +this.nextappear,
       status: this.status,
-      schedule: this.schedule,
     };
 
     if (this.id) {

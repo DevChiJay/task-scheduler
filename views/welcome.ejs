@@ -1,5 +1,4 @@
 <%- include('shared/includes/head', { pageTitle: 'My ToDo List' })  %>
-<script src="/scripts/task-management.js" defer></script>
 </head>
 <body>
     <%- include('shared/includes/header')  %>
@@ -10,7 +9,7 @@
         <ul class="todo">
             <% for (const task of activeTask) { %>
             <li>
-                <span id="todoname"><%= task.taskname %> (<%= task.duration %> mins)</span> <button class="btn btn-alt" data-taskid="<%= task.id %>">Complete</button>
+                <span id="todoname"><%= task.taskname %> (<%= task.duration %> mins)</span> <form action="/task/<%= task.id %>" method="POST"><button class="btn btn-alt">Complete</button></form>
             </li>
             
             <% } %>

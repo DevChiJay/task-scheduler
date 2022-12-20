@@ -37,13 +37,12 @@ async function completeTask(req, res, next) {
     task = await Task.findById(req.params.id);
     await task.complete();
 
-    const nextappear = task.nextappear * (60 * 60 * 1000);
+    const nextappear = task.nextappear * (1000);
     const startTime = new Date(Date.now() + nextappear);
     const endTime = new Date(startTime.getTime() + 2000);
     const job = schedule.scheduleJob(
       { start: startTime, end: endTime, rule: '*/2 * * * * *' },
       async function () {
-        console.log('Time for tea!');
         await task.activate();
       }
     );
@@ -51,7 +50,7 @@ async function completeTask(req, res, next) {
     return next(error);
   }
 
-  res.json({ message: 'Done' });
+  res.redirect('/');
 }
 
 module.exports = {
