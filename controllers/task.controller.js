@@ -1,4 +1,5 @@
 const schedule = require('node-schedule');
+const db = require('../data/database');
 const Task = require('../models/task.model');
 
 function getNewTask(req, res) {
@@ -36,16 +37,26 @@ async function completeTask(req, res, next) {
   try {
     task = await Task.findById(req.params.id);
     await task.complete();
+  } catch (error) {
+    return next(error);
+  }
 
-    const nextappear = task.nextappear * (1000);
-    const startTime = new Date(Date.now() + nextappear);
-    const endTime = new Date(startTime.getTime() + 2000);
-    const job = schedule.scheduleJob(
-      { start: startTime, end: endTime, rule: '*/2 * * * * *' },
-      async function () {
-        await task.activate();
-      }
-    );
+  res.redirect('/');
+}
+
+async function refreshTask(req, res, next) {
+  try {
+    const result = await db
+      .getDb()
+      .collection('tasks')
+      .updateMany(
+        { status: 'Done' },
+        {
+          $set: {
+            status: 'Active',
+          },
+        }
+      );
   } catch (error) {
     return next(error);
   }
@@ -58,4 +69,5 @@ module.exports = {
   createNewTask: createNewTask,
   getTasks: getTasks,
   completeTask: completeTask,
+  refreshTask: refreshTask,
 };

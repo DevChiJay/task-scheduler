@@ -6,10 +6,11 @@
         <h2>
             Active ToDo
         </h2>
+        <form action="/refresh-tasks" method="POST"><button class="btn btn-done">Refresh</button></form>
         <ul class="todo">
             <% for (const task of activeTask) { %>
             <li>
-                <span id="todoname"><%= task.taskname %> (<%= task.duration %> mins)</span> <form action="/task/<%= task.id %>" method="POST"><button class="btn btn-alt">Complete</button></form>
+                <span id="todoname"><%= task.taskname %> - <%= task.nextappear %> times (<%= task.duration %> mins)</span> <form action="/task/<%= task.id %>" method="POST"><button class="btn btn-alt">Complete</button></form>
             </li>
             
             <% } %>

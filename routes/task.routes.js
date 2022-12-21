@@ -11,4 +11,6 @@ router.post('/new-task', taskController.createNewTask);
 
 router.post('/task/:id', taskController.completeTask);
 
+router.post('/refresh-tasks', taskController.refreshTask);
+
 module.exports = router;
